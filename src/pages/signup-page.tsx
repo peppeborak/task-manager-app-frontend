@@ -7,12 +7,13 @@ import {
   Box,
   Card,
 } from '@mui/material'
-import { login } from '../services/api'
+import { login, signup } from '../services/api'
 import { useNavigate } from 'react-router'
 
-export const LoginPage = () => {
+export const SignupPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [verifyPassword, setVerifyPassword] = useState('')
   const [error, setError] = useState('')
 
   const navigate = useNavigate()
@@ -24,12 +25,17 @@ export const LoginPage = () => {
       setError('Both fields are required')
       return
     }
+    if (password !== verifyPassword) {
+      setError('Passwords does not match')
+      return
+    }
     try {
+      await signup({ username, password })
       const { token } = await login({ username, password })
       localStorage.setItem('token', token)
       navigate('/dashboard')
     } catch (error) {
-      setError('Wrong username or password')
+      setError('Username already taken')
       console.log('Error: ', error)
       return
     }
@@ -39,7 +45,7 @@ export const LoginPage = () => {
     <Container maxWidth="xs">
       <Card sx={{ padding: 4, marginTop: 8, boxShadow: 3 }}>
         <Typography variant="h5" component="h1" gutterBottom align="center">
-          Login
+          Signup
         </Typography>
         <Box component="form" onSubmit={handleSubmit}>
           <TextField
@@ -59,6 +65,16 @@ export const LoginPage = () => {
             margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <TextField
+            fullWidth
+            label="Password"
+            type="password"
+            variant="outlined"
+            margin="normal"
+            value={verifyPassword}
+            onChange={(e) => setVerifyPassword(e.target.value)}
             required
           />
           {error && (
@@ -83,7 +99,7 @@ export const LoginPage = () => {
                 cursor: 'pointer',
               },
             }}
-            onClick={() => navigate('/signup')}
+            onClick={() => navigate('/login')}
           >
             Already have an account?
           </Typography>
@@ -93,4 +109,4 @@ export const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default SignupPage

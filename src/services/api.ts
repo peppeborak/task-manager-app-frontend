@@ -1,5 +1,10 @@
 import axios from 'axios'
-import { LoginRequestInput, LoginResponse } from './types'
+import {
+  LoginRequestInput,
+  LoginResponse,
+  SignupRequestInput,
+  SignupResponse,
+} from './types'
 
 const api = axios.create({
   baseURL: 'http://localhost:3000/api/v1',
@@ -19,6 +24,23 @@ export const login = async ({
       password,
     })
     return data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+export const signup = async ({
+  username,
+  password,
+}: SignupRequestInput): Promise<SignupResponse> => {
+  try {
+    const { data } = await api.post('/auth/signup', {
+      username,
+      password,
+    })
+    console.log(data.message)
+    return data.message
   } catch (error) {
     console.error('Error:', error)
     throw error
