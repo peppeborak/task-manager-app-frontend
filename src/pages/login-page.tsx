@@ -8,11 +8,14 @@ import {
   Card,
 } from '@mui/material'
 import { login } from '../services/api'
+import { useNavigate } from 'react-router'
 
 export const LoginPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -24,8 +27,9 @@ export const LoginPage = () => {
     try {
       const { token } = await login({ username, password })
       localStorage.setItem('token', token)
-      // navigate('/dashboard')
+      navigate('/dashboard')
     } catch (error) {
+      setError('Wrong username or password')
       console.log('Error: ', error)
       return
     }
