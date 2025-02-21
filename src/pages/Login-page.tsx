@@ -7,17 +7,26 @@ import {
   Box,
   Card,
 } from '@mui/material'
+import { login } from '../services/api'
 
 export const LoginPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
     setError('')
     if (!username || !password) {
       setError('Both fields are required')
+      return
+    }
+    try {
+      const { token } = await login({ username, password })
+      localStorage.setItem('token', token)
+      // navigate('/dashboard')
+    } catch (error) {
+      console.log('Error: ', error)
       return
     }
   }
