@@ -1,11 +1,4 @@
-import {
-  Divider,
-  Grid2 as Grid,
-  List,
-  ListItem,
-  ListItemText,
-  TextField,
-} from '@mui/material'
+import { Divider, Grid2 as Grid, Paper, TextField } from '@mui/material'
 import { Task, useGetTasks } from '../../queries'
 import { TaskListItem } from './TaskListItem'
 import { useState } from 'react'
@@ -36,31 +29,27 @@ export const TaskList = ({ taskFilter }: Props) => {
             onChange={handleSearch}
           />
         </Grid>
+        <Divider />
         <Grid size={12}>
-          <List>
-            <ListItem key={'Top'}>
-              <ListItemText primary={'Title'} />
-              <ListItemText primary={'Priority'} />
-              <ListItemText primary={'Status'} />
-              <ListItemText primary={'Category'} />
-            </ListItem>
-          </List>
-          <Divider />
-          <List>
-            {tasks
-              .filter(
-                (task: Task) =>
-                  taskFilter === null || task.status === taskFilter
-              )
-              .filter((task: Task) =>
-                task.title.toLowerCase().includes(searchTaskTitle.toLowerCase())
-              )
-              .map((task: Task) => (
-                <ListItem key={task.id}>
-                  <TaskListItem task={task} />
-                </ListItem>
-              ))}
-          </List>
+          <Paper>
+            <Grid container>
+              {tasks
+                .filter(
+                  (task: Task) =>
+                    taskFilter === null || task.status === taskFilter
+                )
+                .filter((task: Task) =>
+                  task.title
+                    .toLowerCase()
+                    .includes(searchTaskTitle.toLowerCase())
+                )
+                .map((task: Task) => (
+                  <Grid size={{ md: 4, xs: 12 }} key={task.id}>
+                    <TaskListItem task={task} />
+                  </Grid>
+                ))}
+            </Grid>
+          </Paper>
         </Grid>
       </Grid>
     </>

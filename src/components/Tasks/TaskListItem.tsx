@@ -3,7 +3,10 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  ListItem,
+  Card,
+  CardContent,
+  Box,
+  CardActionArea,
 } from '@mui/material'
 import { invalidateTasks, Task, updateTask } from '../../queries'
 import {
@@ -97,74 +100,73 @@ export const TaskListItem = ({ task }: Props) => {
 
   return (
     <>
-      <ListItem>
-        <TextField variant="standard" value={title} onChange={handleTitle} />
-      </ListItem>
+      <Card>
+        <CardContent>
+          <Box>
+            <TextField
+              variant="standard"
+              value={title}
+              onChange={handleTitle}
+            />
+            <DeleteTaskButton task={task} />
+          </Box>
 
-      <ListItem>
-        <div>
-          <Select
-            size="small"
-            sx={{ width: 110, ml: 2 }}
-            value={task.priority}
-            label="priority"
-            onChange={(event: SelectChangeEvent) =>
-              handleSelectPriority(task.id, event.target.value)
-            }
-          >
-            {priorities.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
-      </ListItem>
-      <ListItem>
-        <div>
-          <Select
-            size="small"
-            sx={{ width: 140 }}
-            value={task.status}
-            label="status"
-            onChange={(event: SelectChangeEvent) =>
-              handleSelectStatus(task.id, event.target.value)
-            }
-          >
-            {statuses.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
-      </ListItem>
+          <CardActionArea>
+            <div>
+              <Select
+                size="small"
+                sx={{ minWidth: 105 }}
+                value={task.priority}
+                label="priority"
+                onChange={(event: SelectChangeEvent) =>
+                  handleSelectPriority(task.id, event.target.value)
+                }
+              >
+                {priorities.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div>
+              <Select
+                size="small"
+                sx={{ minWidth: 105 }}
+                value={task.status}
+                label="status"
+                onChange={(event: SelectChangeEvent) =>
+                  handleSelectStatus(task.id, event.target.value)
+                }
+              >
+                {statuses.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
 
-      <ListItem>
-        <div>
-          <Select
-            size="small"
-            sx={{ width: 110, ml: 2 }}
-            value={task.category || ''}
-            label="category"
-            onChange={(event: SelectChangeEvent) =>
-              handleSelectCategory(task.id, event.target.value)
-            }
-          >
-            {categories.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-        </div>
-      </ListItem>
-
-      <ListItem>
-        <div>
-          <DeleteTaskButton task={task} />
-        </div>
-      </ListItem>
+            <div>
+              <Select
+                size="small"
+                sx={{ minWidth: 105 }}
+                value={task.category || ''}
+                label="category"
+                onChange={(event: SelectChangeEvent) =>
+                  handleSelectCategory(task.id, event.target.value)
+                }
+              >
+                {categories.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          </CardActionArea>
+        </CardContent>
+      </Card>
     </>
   )
 }

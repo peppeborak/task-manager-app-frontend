@@ -44,7 +44,7 @@ export const useGetTasks = (): QueryResponse<Task[]> => {
   return useQuery({
     queryKey: ['tasks', localStorage.getItem('token')],
     queryFn: async () => {
-      const response = await fetch(`http://localhost:3000/api/v1/tasks`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -70,7 +70,7 @@ export const useSearchTasks = ({
     queryKey: ['tasks', localStorage.getItem('token')],
     queryFn: async () => {
       const response = await fetch(
-        `http://localhost:3000/api/v1/tasks/search?title=${title}`,
+        `${process.env.REACT_APP_API_URL}/search?title=${title}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -90,16 +90,19 @@ export const updateTaskCategory = ({
   return useQuery({
     queryKey: ['tasks', localStorage.getItem('token')],
     queryFn: async () => {
-      const response = await fetch(`http://localhost:3000/api/v1/tasks/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({
-          updatedCategory,
-        }),
-      })
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}tasks/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          body: JSON.stringify({
+            updatedCategory,
+          }),
+        }
+      )
       const json = await response.json()
       return json
     },
@@ -109,7 +112,7 @@ export const updateTaskCategory = ({
 export const newTask = async (
   newTask: NewTask
 ): Promise<QueryResponse<Task>> => {
-  const response = await fetch(`http://localhost:3000/api/v1/tasks/`, {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/tasks/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -125,14 +128,17 @@ export const updateTask = async (
   taskId: number,
   updatedTask: UpdateTask
 ): Promise<QueryResponse<Task>> => {
-  const response = await fetch(`http://localhost:3000/api/v1/tasks/${taskId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    body: JSON.stringify(updatedTask),
-  })
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/tasks/${taskId}`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify(updatedTask),
+    }
+  )
   const json = await response.json()
   return json
 }

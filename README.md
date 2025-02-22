@@ -1,3 +1,76 @@
+![alt text](loginpage.png)
+![alt text](signup.png)
+![alt text](dashboard.png)
+
+# Task Manager Frontend
+
+A responsive and dynamic frontend for the Task Manager application, built with React, TypeScript, React Query and MUI.
+
+# 📌 Features
+
+User authentication and session management
+
+Task creation, editing, deletion, and completion
+
+Task categorization and priority levels
+
+Responsive design with Material UI
+
+API integration with the backend
+
+# 📦 Tech Stack & Libraries
+The project is built using the following technologies:
+
+React 18 
+
+TypeScript 
+
+MUI (Material UI) 
+
+Vite 
+
+### Utilities
+axios
+
+MUI
+
+
+# Prerequisites
+Before setting up the project, ensure you have:
+
+Node.js installed (Latest LTS recommended)
+
+# 🚀 Setup Instructions
+Clone the repository & navigate to the project folder:
+
+git clone <repository_url>
+cd task-manager-app-frontend
+
+Install dependencies:
+
+npm install
+
+Set up environment variables:
+Create a .env file by copying the example:
+
+cp .env.example .env
+
+Open .env and configure the API base URL.
+
+🏃 Running the Application
+
+Start the development server with:
+
+npm start
+
+By default, the app runs on http://localhost:5173.
+
+
+
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
