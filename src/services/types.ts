@@ -19,3 +19,22 @@ export type SignupResponse = {
 export type SearchTaskByTitleInput = {
   title: string
 }
+
+export type UpdateTaskCategoryInput = {
+  id: number
+  updatedCategory: string
+}
+
+export type updateTaskStatusInput = {
+  id: number
+  updatedStatus: string
+}
+
+export type updateTaskPriorityInput = {
+  id: number
+  updatedPriority: string
+}
+
+export type deleteTaskInput = {
+  id: number
+}

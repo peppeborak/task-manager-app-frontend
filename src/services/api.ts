@@ -1,10 +1,14 @@
 import axios from 'axios'
 import {
+  deleteTaskInput,
   LoginRequestInput,
   LoginResponse,
   SearchTaskByTitleInput,
   SignupRequestInput,
   SignupResponse,
+  UpdateTaskCategoryInput,
+  updateTaskPriorityInput,
+  updateTaskStatusInput,
 } from './types'
 import { Task } from '../queries'
 
@@ -55,6 +59,93 @@ export const SearchTasksFromDb = async ({
   try {
     const token = localStorage.getItem('token')
     const response = await api.get(`/tasks/search?title=${title}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+export const updateCategoryToDb = async ({
+  id,
+  updatedCategory,
+}: UpdateTaskCategoryInput): Promise<Task> => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await api.put(
+      `/tasks/${id}`,
+      { updatedCategory },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+export const updateStatusToDb = async ({
+  id,
+  updatedStatus,
+}: updateTaskStatusInput): Promise<Task> => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await api.put(
+      `/tasks/${id}`,
+      { updatedStatus },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+export const updatePriorityToDb = async ({
+  id,
+  updatedPriority,
+}: updateTaskPriorityInput): Promise<Task> => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await api.put(
+      `/tasks/${id}`,
+      { updatedPriority },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+
+    return response.data
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+export const deleteTaskToDb = async ({
+  id,
+}: deleteTaskInput): Promise<void> => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await api.delete(`/tasks/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
