@@ -3,8 +3,7 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-  Grid2 as Grid,
-  Button,
+  ListItem,
 } from '@mui/material'
 import { invalidateTasks, Task, updateTask } from '../../queries'
 import {
@@ -66,8 +65,8 @@ const priorities = [
 
 export const TaskListItem = ({ task }: Props) => {
   const [title, setTitle] = useState(task.title)
-  const [priority, setPriority] = useState(task.priority)
-  const [status, setStatus] = useState(task.status)
+  // const [priority, setPriority] = useState(task.priority)
+  // const [status, setStatus] = useState(task.status)
 
   const handleTitle = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -98,60 +97,74 @@ export const TaskListItem = ({ task }: Props) => {
 
   return (
     <>
-      <Grid size={12}>
+      <ListItem>
         <TextField variant="standard" value={title} onChange={handleTitle} />
-      </Grid>
-      <Grid size={12}>
-        <Select
-          sx={{ width: 110 }}
-          value={task.priority}
-          label="priority"
-          onChange={(event: SelectChangeEvent) =>
-            handleSelectPriority(task.id, event.target.value)
-          }
-        >
-          {priorities.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid size={12}>
-        <Select
-          sx={{ width: 140 }}
-          value={task.status}
-          label="status"
-          onChange={(event: SelectChangeEvent) =>
-            handleSelectStatus(task.id, event.target.value)
-          }
-        >
-          {statuses.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid size={12}>
-        <Select
-          sx={{ width: 100 }}
-          value={task.category || ''}
-          label="category"
-          onChange={(event: SelectChangeEvent) =>
-            handleSelectCategory(task.id, event.target.value)
-          }
-        >
-          {categories.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid size={12}>
-        <DeleteTaskButton task={task} />
-      </Grid>
+      </ListItem>
+
+      <ListItem>
+        <div>
+          <Select
+            size="small"
+            sx={{ width: 110, ml: 2 }}
+            value={task.priority}
+            label="priority"
+            onChange={(event: SelectChangeEvent) =>
+              handleSelectPriority(task.id, event.target.value)
+            }
+          >
+            {priorities.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      </ListItem>
+      <ListItem>
+        <div>
+          <Select
+            size="small"
+            sx={{ width: 140 }}
+            value={task.status}
+            label="status"
+            onChange={(event: SelectChangeEvent) =>
+              handleSelectStatus(task.id, event.target.value)
+            }
+          >
+            {statuses.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      </ListItem>
+
+      <ListItem>
+        <div>
+          <Select
+            size="small"
+            sx={{ width: 110, ml: 2 }}
+            value={task.category || ''}
+            label="category"
+            onChange={(event: SelectChangeEvent) =>
+              handleSelectCategory(task.id, event.target.value)
+            }
+          >
+            {categories.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </div>
+      </ListItem>
+
+      <ListItem>
+        <div>
+          <DeleteTaskButton task={task} />
+        </div>
+      </ListItem>
     </>
   )
 }

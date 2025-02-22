@@ -5,7 +5,6 @@ export const LogoutButton = () => {
     const navigate = useNavigate()
 
     const handleLogout = () => {
-      console.log('Signing out')
       localStorage.removeItem('token')
       navigate('/') // Navigate to the loginscreen
     }
