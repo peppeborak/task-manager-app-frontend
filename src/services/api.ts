@@ -2,9 +2,11 @@ import axios from 'axios'
 import {
   LoginRequestInput,
   LoginResponse,
+  SearchTaskByTitleInput,
   SignupRequestInput,
   SignupResponse,
 } from './types'
+import { Task } from '../queries'
 
 const api = axios.create({
   baseURL: 'http://localhost:3000/api/v1',
@@ -41,6 +43,24 @@ export const signup = async ({
     })
     console.log(data.message)
     return data.message
+  } catch (error) {
+    console.error('Error:', error)
+    throw error
+  }
+}
+
+export const SearchTasksFromDb = async ({
+  title,
+}: SearchTaskByTitleInput): Promise<Task[]> => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await api.get(`/tasks/search?title=${title}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    return response.data
   } catch (error) {
     console.error('Error:', error)
     throw error

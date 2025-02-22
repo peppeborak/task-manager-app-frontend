@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from 'react-router'
 import LoginPage from './pages/login-page'
 import SignupPage from './pages/signup-page'
-import { DashboardPage } from './pages/dashboard-page'
-import { ProtectedRoute } from './components/ProtectedRoute'
+import { ProtectedRoute } from './components/routes/ProtectedRoute'
+import DashboardPage from './pages/dashboard-page'
 
 export function AppRoutes() {
   return (

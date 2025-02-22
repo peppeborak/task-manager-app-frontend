@@ -15,3 +15,7 @@ export type SignupRequestInput = {
 export type SignupResponse = {
   message: string
 }
+
+export type SearchTaskByTitleInput = {
+  title: string
+}

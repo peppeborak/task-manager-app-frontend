@@ -9,8 +9,8 @@ const isAuthenticated = () => {
     const decoded: { exp: number } = jwtDecode(token)
     return decoded.exp * 1000 > Date.now()
   } catch (error) {
-    console.log('Token decoding failed', error);
-    return false;
+    console.log('Token decoding failed', error)
+    return false
   }
 }
 
