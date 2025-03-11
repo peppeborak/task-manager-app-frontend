@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   TextField,
   Button,
@@ -7,8 +6,10 @@ import {
   Box,
   Card,
 } from '@mui/material'
-import { login } from '../services/api'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { login } from '../queries/queries'
+
 
 export const LoginPage = () => {
   const [username, setUsername] = useState('')
@@ -85,7 +86,7 @@ export const LoginPage = () => {
             }}
             onClick={() => navigate('/signup')}
           >
-            Already have an account?
+            Don't have an account?
           </Typography>
         </Box>
       </Card>

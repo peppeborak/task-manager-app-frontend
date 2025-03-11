@@ -1,19 +1,23 @@
 import { Navigate, Route, Routes } from 'react-router'
+import { ProtectedRoute } from './components/routes/protected-route'
+import { BaseLayout } from './pages/base-layout'
+import { DashboardPage } from './pages/dashboard-page'
 import LoginPage from './pages/login-page'
 import SignupPage from './pages/signup-page'
-import { ProtectedRoute } from './components/routes/ProtectedRoute'
-import DashboardPage from './pages/dashboard-page'
+
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="*" element={<Navigate to="/login" />} />
 
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route element={<BaseLayout />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+        </Route>
       </Route>
+      <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   )
 }

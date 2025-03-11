@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   TextField,
   Button,
@@ -7,8 +6,10 @@ import {
   Box,
   Card,
 } from '@mui/material'
-import { login, signup } from '../services/api'
+import { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { login, signup } from '../queries/queries'
+
 
 export const SignupPage = () => {
   const [username, setUsername] = useState('')
@@ -89,7 +90,7 @@ export const SignupPage = () => {
             color="primary"
             sx={{ mt: 2, mb: 2 }}
           >
-            Login
+            Signup & Login
           </Button>
           <Typography
             align="center"

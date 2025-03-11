@@ -1,6 +1,7 @@
 import { jwtDecode } from 'jwt-decode'
 import { Navigate, Outlet } from 'react-router'
 
+
 const isAuthenticated = () => {
   const token = localStorage.getItem('token')
   if (!token) return false
@@ -8,8 +9,7 @@ const isAuthenticated = () => {
   try {
     const decoded: { exp: number } = jwtDecode(token)
     return decoded.exp * 1000 > Date.now()
-  } catch (error) {
-    console.log('Token decoding failed', error)
+  } catch {
     return false
   }
 }
