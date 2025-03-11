@@ -1,4 +1,5 @@
 ![alt text](dashboard-page.png)
+![alt text](dashboard-page-mobile.png)
 ![alt text](login-page.png)
 ![alt text](signup-page.png)
 
