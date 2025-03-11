@@ -1,6 +1,6 @@
-![alt text](loginpage.png)
-![alt text](signup.png)
-![alt text](dashboard.png)
+![alt text](dashboard-page.png)
+![alt text](login-page.png)
+![alt text](signup-page.png)
 
 # Task Manager Frontend
 
@@ -12,8 +12,6 @@ User authentication and session management
 
 Task creation, editing, deletion, and completion
 
-Task categorization and priority levels
-
 Responsive design with Material UI
 
 API integration with the backend
@@ -24,8 +22,6 @@ The project is built using the following technologies:
 React 18 
 
 TypeScript 
-
-MUI (Material UI) 
 
 Vite 
 
@@ -43,17 +39,23 @@ Node.js installed (Latest LTS recommended)
 # 🚀 Setup Instructions
 Clone the repository & navigate to the project folder:
 
-git clone <repository_url>
+```
+git clone https://github.com/peppeborak/task-manager-app-frontend
 cd task-manager-app-frontend
+```
 
 Install dependencies:
 
+```
 npm install
+```
 
 Set up environment variables:
 Create a .env file by copying the example:
 
+```
 cp .env.example .env
+```
 
 Open .env and configure the API base URL.
 
@@ -61,7 +63,9 @@ Open .env and configure the API base URL.
 
 Start the development server with:
 
+```
 npm start
+````
 
 By default, the app runs on http://localhost:5173.
 
